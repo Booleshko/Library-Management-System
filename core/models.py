@@ -31,6 +31,7 @@ class Loan(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     return_date = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __repr__(self):
         return f"{self.book.title} loaned by {self.user}"
