@@ -2,7 +2,7 @@ from django.urls import path
 
 from user.views import CreateUserView, ManagerUserView
 
-app_name = 'user'
+app_name = "user"
 
 urlpatterns = [
     path("", CreateUserView.as_view(), name="register"),

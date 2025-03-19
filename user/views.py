@@ -6,6 +6,7 @@ class CreateUserView(CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = ()
 
+
 class ManagerUserView(RetrieveUpdateAPIView):
     serializer_class = UserSerializer
 
