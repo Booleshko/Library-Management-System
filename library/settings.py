@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -23,6 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "rest_framework",
+    "rest_framework_simplejwt",
+    "drf_spectacular",
     "user",
 ]
 
@@ -92,3 +95,20 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+}
