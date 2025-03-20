@@ -1,6 +1,8 @@
 from rest_framework import viewsets, mixins, generics
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from core import permissions
 from core.models import Book, Loan
 from core.serializers import (
     BookSerializer,
@@ -15,6 +17,7 @@ from core.serializers import (
 class BookListViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = (permissions.IsAdminOrReadOnly,)
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -33,6 +36,7 @@ class LoanViewSet(
 ):
     queryset = Loan.objects.all().select_related("user", "book")
     serializer_class = LoanReadSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -48,6 +52,7 @@ class LoanReturnAPIView(
 ):
     serializer_class = LoanReturnSerializer
     queryset = Loan.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, pk=None) -> Response:
         loan = self.get_object()

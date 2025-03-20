@@ -57,14 +57,14 @@ class LoanCreateSerializer(serializers.ModelSerializer):
 class LoanReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = Loan
-        fields = ("id",)
+        fields = ("id", "is_active")
 
     def validate(self, attrs):
         data = super(LoanReturnSerializer, self).validate(attrs)
         loan = self.instance
 
         if loan.return_date:
-            raise ValidationError(f"Loan {Loan.id} already returned")
+            raise ValidationError(f"Loan {loan.id} already returned")
         return data
 
     def update(self, instance, validated_data):

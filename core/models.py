@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import ForeignKey
 from django.conf import settings
-from rest_framework.exceptions import ValidationError
 
 
 class Book(models.Model):
