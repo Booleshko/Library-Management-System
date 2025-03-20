@@ -53,11 +53,23 @@ class LoanCreateSerializer(serializers.ModelSerializer):
 
         return data
 
+    def create(self, validated_data):
+        book = validated_data.get("book")
+        user = validated_data.get("user")
+
+        if book.available:
+            book.available = False
+            book.save()
+
+        loan = Loan.objects.create(**validated_data)
+        return loan
+
+
 
 class LoanReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = Loan
-        fields = ("id", "is_active")
+        fields = ("id",)
 
     def validate(self, attrs):
         data = super(LoanReturnSerializer, self).validate(attrs)
