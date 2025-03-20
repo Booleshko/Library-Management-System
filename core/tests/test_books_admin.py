@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from .config import payload, sample_book
 
 
-BASE_URL = reverse('core:book-list')
+BASE_URL = reverse("core:book-list")
 
 
 class TestAuthenticatedAdminUser(TestCase):
@@ -19,16 +19,13 @@ class TestAuthenticatedAdminUser(TestCase):
         )
         self.client.force_authenticate(user=self.admin)
 
-
     def test_admin_allow_list_books(self):
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-
     def test_admin_allow_create_book(self):
         response = self.client.post(BASE_URL, payload)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
 
     def test_admin_allow_delete_book(self):
         book = sample_book()

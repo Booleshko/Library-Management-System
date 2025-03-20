@@ -12,7 +12,7 @@ from core.tests.config import sample_book, sample_loan
 import io
 from rest_framework.parsers import JSONParser
 
-BASE_URL = reverse('core:loan-list')
+BASE_URL = reverse("core:loan-list")
 
 
 class TestUnAuthenticatedUser(TestCase):
@@ -23,12 +23,13 @@ class TestUnAuthenticatedUser(TestCase):
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+
 class TestAuthenticatedUser(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
-            email='test@gmail.com',
-            password='test123',
+            email="test@gmail.com",
+            password="test123",
         )
         self.client.force_authenticate(user=self.user)
 
@@ -38,7 +39,7 @@ class TestAuthenticatedUser(TestCase):
 
     def test_authenticated_user_allow_retrieve_loan(self):
         loan = sample_loan(user=self.user)
-        url = reverse('core:loan-detail', args=[loan.id])
+        url = reverse("core:loan-detail", args=[loan.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

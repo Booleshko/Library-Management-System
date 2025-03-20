@@ -2,13 +2,14 @@ from datetime import datetime
 
 from core.models import Book, Loan
 
-payload =  {
-            "title": "Sample book",
-            "author": "Sample author",
-            "isbn": "234342411",
-            "pages": 100,
-            "available": True,
-        }
+payload = {
+    "title": "Sample book",
+    "author": "Sample author",
+    "isbn": "234342411",
+    "pages": 100,
+    "available": True,
+}
+
 
 def sample_book(**params):
     defaults = {
@@ -20,6 +21,7 @@ def sample_book(**params):
     }
     defaults.update(params)
     return Book.objects.create(**defaults)
+
 
 def sample_loan(**params):
     defaults = {

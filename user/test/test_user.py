@@ -8,6 +8,7 @@ from user.models import User
 REGISTER_URL = reverse("user:register")
 TOKEN_URL = reverse("token_obtain_pair")
 
+
 class UserTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
