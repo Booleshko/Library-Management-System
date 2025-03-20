@@ -18,7 +18,6 @@ class TestUnAuthenticatedUser(TestCase):
 
     def test_unauthenticated_user_forbid_create_book(self):
         response = self.client.post(BASE_URL, payload)
-        print(response)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
